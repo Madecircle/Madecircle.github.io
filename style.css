@@ -1,0 +1,60 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+a{
+    text-decoration:none;
+    font-family:"Playpen Sans", cursive;
+}
+h3, p{
+    font-family:"Playpen Sans", cursive;
+}
+.main-wrap{
+    width:100%;
+    display: flex;
+}
+.main-wrap .main-head{
+    width: 20%;
+    height: 100vh;
+    background:#00000a;
+    overflow: hidden; 
+    transition: .3s ease-in-out;
+}
+.rectangle {
+  height: 50px;
+  width: 90%;
+  background-color: #fff;
+  /*how to make sure it aligns to the right side of bar? */
+}
+.main-wrap .main-head .main-nav{
+    width:100%;
+}
+.main-wrap .main-head .main-nav .navbar{
+    width:100%;
+}
+.main-wrap .main-head .main-nav .navbar .navbar-nav .title{
+    padding: 15px 19px;
+    border-bottom: 1px solid #2f3e46
+}
+
+.main-wrap .main-head .main-nav .navbar .navbar-nav .title h3 {
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 35px;
+    color: #fff;
+    position: relative;
+}
+
+.main-wrap .main-head .main-nav .navbar .navbar-nav .title h3 .title-text{
+    position:absolute;
+    left: 35px;
+}
+
+.main-wrap .showcase{
+    width: 80%;
+}
