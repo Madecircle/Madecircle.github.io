@@ -9,27 +9,28 @@ body {
 }
 
 .sidebar {
+  position: relative;
   width: 12rem;
   min-height: 100vh;
-  padding-top: 24px; /* this determines the first shift down of the LINES */
+  padding-top: 0;
   border-right: 3px solid black;
+  background: #ece9d8;
+}
 
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      #ece9d8 0,
-      #ece9d8 3.25rem,
-      black 3.25rem,
-      black 55px
-    );
+.white-key {
+  display: block;
+  height: 4.25rem;
+  border-bottom: 3px solid black;
+  background: rgba(236, 233, 216, 0.65);
 }
 
 .btn {
-  display: block;
+  position: absolute;
+  z-index: 2;
+
+  left: 2.5rem;
   width: 150px;
   height: 3.25rem;
-  margin-left: 2.5rem;
-  margin-bottom: 0.25rem;
   padding: 1rem 2rem;
 
   background: black;
@@ -44,11 +45,43 @@ body {
   cursor: pointer;
 }
 
-.group-gap {
-  margin-bottom: 3.5rem;
+/* black keys centered on the line between white keys */
+.btn:nth-of-type(1) {
+  top: calc(4.25rem - 1.625rem);
 }
 
-.btn:hover {
-  transform: translateX(8px);
-  width: 143px;
+.btn:nth-of-type(2) {
+  top: calc(8.5rem - 1.625rem);
+}
+
+.btn:nth-of-type(3) {
+  top: calc(17rem - 1.625rem);
+}
+
+.btn:nth-of-type(4) {
+  top: calc(21.25rem - 1.625rem);
+}
+
+.btn:nth-of-type(5) {
+  top: calc(25.5rem - 1.625rem);
+}
+
+.btn:nth-of-type(6) {
+  top: calc(34rem - 1.625rem);
+}
+
+.btn:nth-of-type(7) {
+  top: calc(38.25rem - 1.625rem);
+}
+
+.btn:nth-of-type(8) {
+  top: calc(46.75rem - 1.625rem);
+}
+
+.btn:nth-of-type(9) {
+  top: calc(51rem - 1.625rem);
+}
+
+.btn:nth-of-type(10) {
+  top: calc(55.25rem - 1.625rem);
 }
