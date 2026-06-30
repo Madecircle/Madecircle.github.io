@@ -1,0 +1,206 @@
+
+/* @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap'); */
+
+:root {
+  --pianokeys: #00000a; 
+  --primary: #a855f7;
+  --secondary: #ec4899;
+  --accent: #06b6d4;
+  --bg-dark: #fff;
+  --bg-card: #ece9d8;
+  --text: #fafafa;
+  --text-muted: #71717a;
+}
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg-dark);
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--text);
+  display: flex;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  position: fixed; /* stays in place when scrolling*/
+  height: 100vh;
+  max-width: 12rem;
+}
+
+/* Card */
+.card {
+  position: relative;
+  height: 100%;
+  background: var(--bg-card);
+  border-radius: 0;
+  border-right: 3px solid #00000a;
+  overflow: align self;
+}
+
+.card-bg {
+  position: absolute;
+  top: -10rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20rem;
+  height: 20rem;
+  background: var(--bg-card);
+  /* background: radial-gradient(circle, var(--primary) 0%, transparent 70%); */
+  opacity: 0.2;
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+.card-content {
+  position: absolute;
+  padding: 3rem 2rem;
+  text-align: center;
+}
+
+/* Logo */
+.logo {
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 20px 40px rgba(168, 85, 247, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.logo-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Title */
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 2rem;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.5); }
+}
+/* menu .menu-buttons */
+.menu-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* Dit duwt alle knoppen naar de rechterkant van de bar! */
+  gap: 1rem;            /* De standaard ruimte tussen de andere knoppen */
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/* Button */
+.btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: var(--pianokeys);
+  /* background: linear-gradient(135deg, var(--primary), var(--secondary)); */
+  border: none;
+  border-radius: 0.75rem;
+  width: 150px;
+  margin-bottom: 10px; 
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+}
+
+.btn-space{
+  margin-bottom: 2.5rem;
+}
+
+.btn:hover {
+  transform: translateX(5px);
+  box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+}
+
+.btn:hover .btn-icon {
+  transform: translateX(4px);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  transition: transform 0.3s ease;
+}
+
+/* Stats */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #27272a;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: #52525b;
+  font-size: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+/* Bonus: Hover effects for stats */
+.stat:hover .stat-value {
+  color: var(--primary);
+  transition: color 0.3s ease;
+}
