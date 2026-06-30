@@ -49,6 +49,6 @@ body {
 }
 
 .btn:hover {
-  transform: translateX(8);
+  transform: translateX(8px);
   width: 143px;
 }
