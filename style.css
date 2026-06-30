@@ -10,24 +10,25 @@ body {
 .sidebar {
   width: 12rem;
   min-height: 100vh;
+  padding-top: 24px; /* this determines the first shift down of the LINES */
   border-right: 3px solid black;
 
   background:
     repeating-linear-gradient(
       to bottom,
       #ece9d8 0,
-      #ece9d8 38px,
-      black 38px,
-      black 40px
+      #ece9d8 3.25rem,
+      black 3.25rem,
+      black 55px
     );
 }
 
 .btn {
   display: block;
   width: 150px;
-  position: relative;
   height: 3.25rem;
   margin-left: 2.5rem;
+  margin-bottom: 0.25rem;
   padding: 1rem 2rem;
 
   background: black;
@@ -38,6 +39,10 @@ body {
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+}
+
+.group-gap {
+  margin-bottom: 3.5rem;
 }
 
 .btn:hover {
