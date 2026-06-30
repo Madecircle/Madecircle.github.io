@@ -1,114 +1,46 @@
-
-
-/* @import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap'); */
-
-:root {
-  --pianokeys: #00000a; 
-  --primary: #a855f7;
-  --secondary: #ec4899;
-  --accent: #06b6d4;
-  --bg-dark: #fff;
-  --bg-card: #ece9d8;
-  --text: #fafafa;
-  --text-muted: #71717a;
+* {
+  box-sizing: border-box;
 }
 
-/* Container */
-.container {
-  max-width: 12rem;
+body {
+  margin: 0;
+  font-family: system-ui, sans-serif;
 }
 
-/* Card */
-.card {
+.sidebar {
   width: 12rem;
-  position: absolute;
-  top: 0;
-  left: 0;
   min-height: 100vh;
-  background: var(--bg-card);
-  border-radius: 0;
-  border-right: 3px solid #00000a;
-  overflow: align self; /* ?? */
+  border-right: 3px solid black;
+
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #ece9d8 0,
+      #ece9d8 38px,
+      black 38px,
+      black 40px
+    );
 }
 
-.card-bg {
-  position: absolute;
-  top: -12rem;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 20rem;
-  height: 20rem;
-  background: var(--bg-card);
-  /* background: radial-gradient(circle, var(--primary) 0%, transparent 70%); */
-  opacity: 0.2;
-  filter: blur(60px);
-  pointer-events: none;
-}
-
-.card-content {
-  position: absolute;
-  padding: 3rem 2rem;
-  text-align: center;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes bounce {
-  0%, 100% { transform: scaleY(1); }
-  50% { transform: scaleY(0.5); }
-}
-/* menu .menu-buttons */
-.menu-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* Dit duwt alle knoppen naar de rechterkant van de bar! */
-  gap: 1rem;            /* De standaard ruimte tussen de andere knoppen */
-  margin-top: 2rem;
-  width: 100%;
-}
-
-/* Button */
 .btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2rem;
-  background: var(--pianokeys);
-  /* background: linear-gradient(135deg, var(--primary), var(--secondary)); */
-  border: none;
-  border-radius: 0.75rem;
+  display: block;
   width: 150px;
-  margin-bottom: 10px; 
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  font-family: inherit;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
-}
+  position: relative;
+  height: 3.25rem;
+  margin-left: 2.5rem;
+  padding: 1rem 2rem;
 
-.btn-space{
-  margin-bottom: 2.5rem;
+  background: black;
+  color: white;
+  border: 0;
+  border-radius: 0.75rem 0 0 0.75rem;
+
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .btn:hover {
-  transform: translateX(5px);
-  box-shadow: 0 15px 40px rgba(168, 85, 247, 0.4);
+  transform: translateX(15px);
+  width: 135px;
 }
-
-.btn:hover .btn-icon {
-  transform: translateX(4px);
-}
-
-.btn:active {
-  transform: translateY(-1px);
-}
-
-.btn-icon {
-  transition: transform 0.3s ease;
-}
-
