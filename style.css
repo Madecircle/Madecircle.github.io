@@ -1,5 +1,11 @@
+:root {
+  --white-height: 3.5rem;
+  --black-height: 2.5rem;
+}
+
 * {
   box-sizing: border-box;
+
 }
 
 body {
@@ -13,22 +19,22 @@ body {
   width: 12rem;
   min-height: 100vh;
   padding-top: 0;
-  border-right: 3px solid black;
+  border-right: 12px solid black;
   background: black;
 }
 
 .white-key {
   display: block;
-  height: 4.25rem;
-  border-radius: 0.75rem 0 0 0.75rem;
+  height: var(--white-height);
+  border-radius: 0.05rem 0 0 0.05rem;
   border-top: 1px solid black;
   border-left: 2px solid black;
   border-bottom: 1px solid black;
-  background: rgba(236, 233, 216);
+  background: #ece9d8;
 }
 
 .white-key:hover {
-  height: 4.25rem;
+  height: var(--white-height);
   border-top: calc(1px + 0.25rem) solid black;
   border-left: 0.5rem solid black;
   border-bottom: calc(1px + 0.25rem) solid black;
@@ -40,15 +46,14 @@ body {
   position: absolute;
   z-index: 2;
 
-  left: 2.5rem;
+  left: 2rem;
   width: 150px;
-  height: 3.25rem;
-  padding: 1rem 2rem;
+  height: var(--black-height);
 
   background: black;
   color: white;
   border: 0;
-  border-radius: 0.75rem 0 0 0.75rem;
+  border-radius: 0.05rem 0 0 0.05rem;
   transition: all 0.3s ease;
   box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
 
@@ -59,43 +64,51 @@ body {
 
 /* black keys centered on the line between white keys */
 .btn:nth-of-type(1) {
-  top: calc(4.25rem - 1.625rem);
+  top: calc(var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(2) {
-  top: calc(8.5rem - 1.625rem);
+  top: calc(2*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(3) {
-  top: calc(17rem - 1.625rem);
+  top: calc(4*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(4) {
-  top: calc(21.25rem - 1.625rem);
+  top: calc(5*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(5) {
-  top: calc(25.5rem - 1.625rem);
+  top: calc(6*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(6) {
-  top: calc(34rem - 1.625rem);
+  top: calc(8*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(7) {
-  top: calc(38.25rem - 1.625rem);
+  top: calc(9*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(8) {
-  top: calc(46.75rem - 1.625rem);
+  top: calc(11*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(9) {
-  top: calc(51rem - 1.625rem);
+  top: calc(12*var(--white-height) - 1.125rem);
 }
 
 .btn:nth-of-type(10) {
-  top: calc(55.25rem - 1.625rem);
+  top: calc(13*var(--white-height) - 1.125rem);
+}
+
+.btn:nth-of-type(11) {
+  top: calc(15*var(--white-height) - 1.125rem);
+}
+
+.btn:nth-of-type(12) {
+  top: calc(16*var(--white-height) - 1.125rem);
 }
 
 .btn:hover {
