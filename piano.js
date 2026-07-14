@@ -9,6 +9,18 @@ const btns_notes = ["C#", "D#", "F#", "G#", "A#"];
 const spans = document.querySelectorAll("span.white-key");
 const btns = document.querySelectorAll("button");
 
+const lick = new Tone.Part((time, value) => {
+	synth.triggerAttackRelease(value.note, value.dur, time);
+}, [
+	{ time: "0:0:0", note: "D5", dur: "8n" },
+	{ time: "0:0:2", note: "E5", dur: "8n" },
+	{ time: "0:1:0", note: "F5", dur: "8n" },
+	{ time: "0:1:2", note: "G5", dur: "8n" },
+	{ time: "0:2:0", note: "E5", dur: "4n" },
+	{ time: "0:3:0", note: "C5", dur: "8n" },
+	{ time: "0:3:2", note: "D5", dur: "2n" },
+]);
+
 (function registerHandlers() {
 	for(let i=0; i<spans.length; i++) {
 		const note_name = spans_notes[i % spans_notes.length];
@@ -16,19 +28,11 @@ const btns = document.querySelectorAll("button");
 		if(note === "D5") {
 			spans[i].addEventListener('click', async () => {
 				await Tone.start();
-				const melody = new Tone.Part((time, value) => {
-				    // value contains both the pitch and the custom duration
-				    synth.triggerAttackRelease(value.note, value.dur, time);
-				}, [
-				    { time: "0:0:0", note: "D5", dur: "8n" },   // Quarter note
-				    { time: "0:0:2", note: "E5", dur: "8n" },   // Eighth note
-				    { time: "0:1:0", note: "F5", dur: "8n" },   // Eighth note
-				    { time: "0:1:2", note: "G5", dur: "8n" },   // Eighth note
-				    { time: "0:2:0", note: "E5", dur: "4n" },   // Half note
-				    { time: "0:3:0", note: "C5", dur: "8n" },   // Next measure
-				    { time: "0:3:2", note: "D5", dur: "2n" },   // Next measure
-				]);
-				melody.start(0);
+
+				Tone.Transport.stop();
+				Tone.Transport.position = 0;
+
+				lick.start(0);
 				Tone.Transport.start();
 			});
 		} else {
