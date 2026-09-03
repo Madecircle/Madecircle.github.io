@@ -88,87 +88,77 @@ body.chain(
 Tone.Transport.swing = 0.3;
 Tone.Transport.swingSubdivision = "8n";
 
-let spans_octave = 4;
-let btns_octave = 4;
-
-const spans_notes = ["C", "D", "E", "F", "G", "A", "B"];
-const btns_notes = ["C#", "D#", "F#", "G#", "A#"];
-
-const spans = document.querySelectorAll("span.white-key");
-const btns = document.querySelectorAll("button");
-
-const lick = new Tone.Part((time, value) => {
-	e_piano.triggerAttackRelease(value.note, value.dur, time, value.velocity);
-	body.triggerAttackRelease(value.note, value.dur, time, value.velocity * 0.65);
-}, [
-	{ time: "0:0:0", note: "D5", dur: "8n", velocity: 0.8 },
-	{ time: "0:0:2", note: "E5", dur: "8n", velocity: 0.8 },
-	{ time: "0:1:0", note: "F5", dur: "8n", velocity: 0.8 },
-	{ time: "0:1:2", note: "G5", dur: "8n", velocity: 0.8 },
-	{ time: "0:2:0", note: "E5", dur: "4n", velocity: 0.8 },
-	{ time: "0:3:0", note: "C5", dur: "8n", velocity: 0.8 },
-	{ time: "0:3:2", note: "D5", dur: "2n", velocity: 0.8 },
-]);
-
-const porgy = new Tone.Part((time, value) => {
-	e_piano.triggerAttackRelease(value.note, value.dur, time, value.velocity);
-	body.triggerAttackRelease(value.note, value.dur, time, value.velocity * 0.65);
-}, [
-	{ time: "0:0:2", note: "E4", dur: "8n", velocity: 0.8 },
-	{ time: "0:1:0", note: "G#4", dur: "8n", velocity: 0.8 },
-	{ time: "0:1:2", note: "B4", dur: "8n", velocity: 0.8 },
-	{ time: "0:2:0", note: "D#5", dur: "8n", velocity: 0.8 },
-	{ time: "0:2:2", note: "F#5", dur: "4n", velocity: 0.8 },
-]);
-
-function playOnly(part) {
-	Tone.Transport.stop();
-	Tone.Transport.cancel();
-	lick.stop();
-	porgy.stop();
-
-	if(part == "lick") {
-		Tone.Transport.bpm.value = 120;
-		lick.start(0);
-	} else {
-		Tone.Transport.bpm.value = 60;
-		porgy.start(0);
-	}
-	Tone.Transport.start();
+// A single scheduling callback shared by every song part.
+function playPhrase(time, value) {
+    e_piano.triggerAttackRelease(value.note, value.dur, time, value.velocity);
+    body.triggerAttackRelease(value.note, value.dur, time, value.velocity * 0.65);
 }
 
-(function registerHandlers() {
-	for(let i=0; i<spans.length; i++) {
-		const note_name = spans_notes[i % spans_notes.length];
-		const note = `${note_name}${spans_octave}`;
-		if(note === "D5") {
-			spans[i].addEventListener('click', async () => {
-				await Tone.start();
-				playOnly('lick');
-			});
-		} else {
-			spans[i].addEventListener('click', async () => {
-				await Tone.start();
-				e_piano.triggerAttackRelease(note, '4n');
-			});
-		}
-		if(i%spans_notes.length === spans_notes.length-1) { spans_octave++; }
-	}
+const lick = new Tone.Part(playPhrase, [
+    { time: "0:0:0", note: "D5", dur: "8n", velocity: 0.8 },
+    { time: "0:0:2", note: "E5", dur: "8n", velocity: 0.8 },
+    { time: "0:1:0", note: "F5", dur: "8n", velocity: 0.8 },
+    { time: "0:1:2", note: "G5", dur: "8n", velocity: 0.8 },
+    { time: "0:2:0", note: "E5", dur: "4n", velocity: 0.8 },
+    { time: "0:3:0", note: "C5", dur: "8n", velocity: 0.8 },
+    { time: "0:3:2", note: "D5", dur: "2n", velocity: 0.8 },
+]);
 
-	for(let i=0; i<btns.length; i++) {
-		const note_name = btns_notes[i % btns_notes.length];
-		const note = `${note_name}${btns_octave}`;
-		if(note === "G#5") {
-			btns[i].addEventListener('click', async () => {
-				await Tone.start();
-				playOnly("porgy");
-			});
-		} else {
-			btns[i].addEventListener('click', async () => {
-				await Tone.start();
-				e_piano.triggerAttackRelease(note, '4n');
-			});
-		}
-		if(i%btns_notes.length === btns_notes.length-1) { btns_octave++; }
-	}
-})();
+const porgy = new Tone.Part(playPhrase, [
+    { time: "0:0:2", note: "E4", dur: "8n", velocity: 0.8 },
+    { time: "0:1:0", note: "G#4", dur: "8n", velocity: 0.8 },
+    { time: "0:1:2", note: "B4", dur: "8n", velocity: 0.8 },
+    { time: "0:2:0", note: "D#5", dur: "8n", velocity: 0.8 },
+    { time: "0:2:2", note: "F#5", dur: "4n", velocity: 0.8 },
+]);
+
+// Each song: which Part to play and the tempo it should play at.
+const songs = {
+    lick: { part: lick, bpm: 120 },
+    porgy: { part: porgy, bpm: 60 },
+};
+
+function playSong(name) {
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    lick.stop();
+    porgy.stop();
+
+    const song = songs[name];
+    if (!song) return;
+
+    Tone.Transport.bpm.value = song.bpm;
+    song.part.start(0);
+    Tone.Transport.start();
+}
+
+// Slide the piano drawer in/out on mobile.
+function menuToggle() {
+    document.querySelector(".sidebar").classList.toggle("open");
+}
+
+// The HTML is the single source of truth for the mapping:
+// every key carries data-note, song keys carry data-action="song:<name>",
+// and nav keys carry data-target="#section". Order in the DOM no longer matters.
+const keys = document.querySelectorAll("[data-note]");
+
+keys.forEach((key) => {
+    key.addEventListener("click", async () => {
+        await Tone.start();
+
+        // 1. Make the sound.
+        const action = key.dataset.action;
+        if (action && action.startsWith("song:")) {
+            playSong(action.split(":")[1]);
+        } else {
+            e_piano.triggerAttackRelease(key.dataset.note, "4n");
+        }
+
+        // 2. If this is a nav key, scroll to its section and close the drawer.
+        const target = key.dataset.target;
+        if (target) {
+            document.querySelector(target)?.scrollIntoView({ behavior: "smooth" });
+            document.querySelector(".sidebar").classList.remove("open");
+        }
+    });
+});

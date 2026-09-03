@@ -1,45 +1,54 @@
 :root {
-  --white-height: 3.5rem;
-  --black-height: 2.5rem;
+  --black-height: 4rem;
+  --sidebar-width: 15rem;
+  --sidebar-border: 12px;
 }
 
 * {
   box-sizing: border-box;
+}
 
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
-  background-color: #be1818;
+  background-color: #2d0606;
+  color: #f3e9e9;
   font-family: system-ui, sans-serif;
 }
 
+/* ---------- Piano nav: fixed and full height ---------- */
 .sidebar {
-  position: relative;
-  width: 12rem;
-  min-height: 100vh;
-  padding-top: 0;
-  border-right: 12px solid black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100vh;
+  border-right: var(--sidebar-border) solid black;
   background: black;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
 }
 
+/* The 7 white keys share the full height equally, so the piano always
+   fills the screen — no empty black space underneath. */
 .white-key {
-  display: block;
-  height: var(--white-height);
+  flex: 1 1 0;
+  min-height: 0;
   border-radius: 0.05rem 0 0 0.05rem;
   border-top: 1px solid black;
   border-left: 2px solid black;
   border-bottom: 1px solid black;
   background: #ece9d8;
+  transition: all 0.15s ease;
+  cursor: pointer;
 }
 
 .white-key:hover {
-  height: var(--white-height);
-  border-top: calc(1px + 0.25rem) solid black;
   border-left: 0.5rem solid black;
-  border-bottom: calc(1px + 0.25rem) solid black;
-  transition: all 0.3s ease;
-  /* box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3); */
 }
 
 .btn {
@@ -47,71 +56,110 @@ body {
   z-index: 2;
 
   left: 2rem;
-  width: 150px;
+  /* Width scales with the sidebar so the black keys always leave the
+     same small gap on the right, whatever --sidebar-width is set to. */
+  width: calc(var(--sidebar-width) - 3rem);
   height: var(--black-height);
 
   background: black;
   color: white;
   border: 0;
   border-radius: 0.05rem 0 0 0.05rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(168, 85, 247, 0.3);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  transition: all 0.2s ease;
 
   font: inherit;
   font-weight: 600;
   cursor: pointer;
 }
 
-/* black keys centered on the line between white keys */
-.btn:nth-of-type(1) {
-  top: calc(var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(2) {
-  top: calc(2*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(3) {
-  top: calc(4*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(4) {
-  top: calc(5*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(5) {
-  top: calc(6*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(6) {
-  top: calc(8*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(7) {
-  top: calc(9*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(8) {
-  top: calc(11*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(9) {
-  top: calc(12*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(10) {
-  top: calc(13*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(11) {
-  top: calc(15*var(--white-height) - 1.125rem);
-}
-
-.btn:nth-of-type(12) {
-  top: calc(16*var(--white-height) - 1.125rem);
-}
+/* One octave = 5 black keys, sitting on the white-key boundaries as a
+   fraction of the full sidebar height: 1/7, 2/7, 4/7, 5/7, 6/7.
+   (E-F and B-C have no black key, hence the skips.) */
+.btn:nth-of-type(1) { top: calc(14.2857% - 2rem); }
+.btn:nth-of-type(2) { top: calc(28.5714% - 2rem); }
+.btn:nth-of-type(3) { top: calc(57.1429% - 2rem); }
+.btn:nth-of-type(4) { top: calc(71.4286% - 2rem); }
+.btn:nth-of-type(5) { top: calc(85.7143% - 2rem); }
 
 .btn:hover {
   transform: translateX(8px);
-  width: 143px;
+  width: calc(var(--sidebar-width) - 3.5rem);
+}
+
+/* ---------- Page content ---------- */
+main {
+  margin-left: calc(var(--sidebar-width) + var(--sidebar-border));
+}
+
+section {
+  min-height: 100vh;
+  padding: 4rem clamp(1.5rem, 5vw, 5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+section h2 {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  margin: 0 0 1rem;
+}
+
+section p {
+  max-width: 60ch;
+  line-height: 1.7;
+  color: #d9c9c9;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.gallery-grid div {
+  aspect-ratio: 1;
+  background: #4a1010;
+  border-radius: 0.5rem;
+}
+
+/* ---------- Toggle (mobile only) ---------- */
+.menu-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 10;
+
+    width: 3rem;
+    height: 3rem;
+    background: black;
+    color: white;
+    border: 0;
+    border-radius: 0.4rem;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+
+  /* Piano keeps its full-height piano look, but slides in as a drawer. */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Content uses the full width; the piano floats over it when open. */
+  main {
+    margin-left: 0;
+  }
 }

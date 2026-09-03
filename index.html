@@ -7,53 +7,64 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button class="menu-toggle" onclick="menuToggle()" aria-label="Toggle Menu">☰</button>
+
   <aside class="sidebar">
-    <span class="white-key"></span>
-    <button class="btn">Home</button>
-  
-    <span class="white-key"></span>
-    <button class="btn group-gap">About</button>
-  
-    <span class="white-key"></span>
-  
-    <span class="white-key"></span>
-    <button class="btn">Gallery</button>
-  
-    <span class="white-key"></span>
-    <button class="btn">Contact</button>
-  
-    <span class="white-key"></span>
-    <button class="btn group-gap">FAQ</button>
-  
-    <span class="white-key"></span>
-  
-    <span class="white-key"></span>
-    <button class="btn"></button>
-  
-    <span class="white-key"></span>
-    <button class="btn group-gap"></button>
-  
-    <span class="white-key"></span>
-  
-    <span class="white-key"></span>
-    <button class="btn"></button>
-  
-    <span class="white-key"></span>
-    <button class="btn"></button>
-  
-    <span class="white-key"></span>
-    <button class="btn group-gap"></button>
-  
-    <span class="white-key"></span>
-    <button class="btn"></button>
+    <span class="white-key" data-note="C4"></span>
+    <button class="btn" data-note="C#4" data-target="#home">Home</button>
 
-    <span class="white-key"></span>
-    <button class="btn"></button>
+    <span class="white-key" data-note="D4" data-action="song:lick"></span>
+    <button class="btn" data-note="D#4" data-target="#about">About</button>
 
-    <span class="white-key"></span>
-    <span class="white-key"></span>
+    <span class="white-key" data-note="E4"></span>
+
+    <span class="white-key" data-note="F4"></span>
+    <button class="btn" data-note="F#4" data-target="#gallery">Gallery</button>
+
+    <span class="white-key" data-note="G4"></span>
+    <button class="btn" data-note="G#4" data-target="#contact">Contact</button>
+
+    <span class="white-key" data-note="A4"></span>
+    <button class="btn" data-note="A#4" data-target="#faq">FAQ</button>
+
+    <span class="white-key" data-note="B4" data-action="song:porgy"></span>
   </aside>
+
+  <main>
+    <section id="home">
+      <h2>Madeline El Aissati</h2>
+      <p>Welcome — this is the home section. Replace this with a short introduction:
+         who you are, what you do, and what visitors will find on this page.</p>
+    </section>
+
+    <section id="about">
+      <h2>About</h2>
+      <p>Placeholder about text. Tell your story here — background, what you're
+         passionate about, and anything you'd like people to know.</p>
+    </section>
+
+    <section id="gallery">
+      <h2>Gallery</h2>
+      <p>A few placeholder tiles — swap these for real images.</p>
+      <div class="gallery-grid">
+        <div></div><div></div><div></div>
+        <div></div><div></div><div></div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Placeholder contact section. Add an email address, a form, or links to
+         your socials so people can reach you.</p>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <p>Placeholder questions and answers go here.</p>
+    </section>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.3.5/Tone.js"></script>
+  <script src="piano.js"></script>
 </body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tone/15.3.5/Tone.js"></script>
-<script src="piano.js"></script>
 </html>
